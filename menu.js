@@ -1,20 +1,29 @@
 function filterItems(category) {
   let items = document.querySelectorAll(".pizza-item");
+
   items.forEach((item) => {
-    item.style.display =
-      category === "all" || item.classList.contains(category)
-        ? "block"
-        : "none";
+    if (category === "all" || item.classList.contains(category)) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
   });
+
+  let buttons = document.querySelectorAll(".filter-btns button");
+  buttons.forEach((btn) => btn.classList.remove("active"));
+  event.target.classList.add("active");
 }
 
-// Search filter
 document.getElementById("searchBox").addEventListener("keyup", function () {
   let query = this.value.toLowerCase();
   let items = document.querySelectorAll(".pizza-item");
 
   items.forEach((item) => {
     let text = item.innerText.toLowerCase();
-    item.style.display = text.includes(query) ? "block" : "none";
+    if (text.includes(query)) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
   });
 });
